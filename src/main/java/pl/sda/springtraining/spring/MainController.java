@@ -28,6 +28,8 @@ public class MainController {
         if (validationResult.hasErrors()) {
             return "registerForm";
         }
+        userRegistrationService.registerUser(userRegistrationDto);
+        model.addAttribute("userEmail",userRegistrationDto.getEmail());
         return "registerResult";
     }
 
@@ -35,6 +37,7 @@ public class MainController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(Model model) {
         model.addAttribute("userRegistrationDto", new UserRegistrationDto());
+        model.addAttribute("countries",Countries.values());
         return "registerForm";
     }
 }
