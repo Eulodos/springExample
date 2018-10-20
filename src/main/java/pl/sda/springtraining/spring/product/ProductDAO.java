@@ -3,6 +3,8 @@ package pl.sda.springtraining.spring.product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ProductDAO {
 
@@ -15,5 +17,10 @@ public class ProductDAO {
 
     public void saveNewProduct(Product product) {
         productRepository.save(product);
+    }
+
+    //todo: DTO
+    public List<Product> findProducts() {
+        return productRepository.findAll();
     }
 }

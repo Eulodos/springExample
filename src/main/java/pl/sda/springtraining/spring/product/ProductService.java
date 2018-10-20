@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class ProductService {
@@ -22,5 +23,9 @@ public class ProductService {
         product.setPrice(price);
 
         productDAO.saveNewProduct(product);
+    }
+
+    public List<Product> findProducts() {
+        return productDAO.findProducts();
     }
 }
