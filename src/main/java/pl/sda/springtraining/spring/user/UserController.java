@@ -1,4 +1,4 @@
-package pl.sda.springtraining.spring;
+package pl.sda.springtraining.spring.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,17 +7,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import pl.sda.springtraining.spring.Countries;
 
 import javax.validation.Valid;
 
 @Controller
-public class MainController {
+public class UserController {
 
     private UserRegistrationService userRegistrationService;
     private UserLoginService userLoginService;
 
     @Autowired
-    public MainController(UserRegistrationService userRegistrationService, UserLoginService userLoginService) {
+    public UserController(UserRegistrationService userRegistrationService, UserLoginService userLoginService) {
 
         this.userRegistrationService = userRegistrationService;
         this.userLoginService = userLoginService;

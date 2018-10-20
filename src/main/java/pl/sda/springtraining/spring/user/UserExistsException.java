@@ -1,4 +1,4 @@
-package pl.sda.springtraining.spring;
+package pl.sda.springtraining.spring.user;
 
 public class UserExistsException extends RuntimeException {
 

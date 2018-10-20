@@ -1,4 +1,4 @@
-package pl.sda.springtraining.spring;
+package pl.sda.springtraining.spring.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

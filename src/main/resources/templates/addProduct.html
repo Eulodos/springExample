@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dodawanie produktu</title>
+</head>
+<body>
+<form th:action="@{/product}" method="get">
+    <input type="text" name="productName" placeholder="Nazwa Produktu">
+    <input type="number" name="stockAmount" placeholder="Stan magazynowy">
+    <input type="number" name="price" placeholder="Cena">
+    <button>Dodaj produkt</button>
+</form>
+
+</body>
+</html>

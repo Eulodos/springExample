@@ -1,4 +1,4 @@
-package pl.sda.springtraining.spring;
+package pl.sda.springtraining.spring.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

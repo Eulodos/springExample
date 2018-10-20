@@ -1,4 +1,4 @@
-package pl.sda.springtraining.spring;
+package pl.sda.springtraining.spring.user;
 
 
 import org.apache.commons.codec.digest.DigestUtils;
