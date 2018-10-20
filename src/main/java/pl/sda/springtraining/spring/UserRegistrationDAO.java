@@ -12,4 +12,18 @@ public class UserRegistrationDAO {
     public UserRegistrationDAO(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
+
+    public void saveNewUser(User user) {
+        if (userExists(user.getEmail())) {
+            throw new UserExistsException("Użytkownik " + user.getEmail() + " już istnieje");
+        }
+        userRepository.save(user);
+    }
+
+    public boolean userExists(String email){
+        if (userRepository.findUserByEmail(email) != null) {
+
+        }
+        return false;
+    }
 }

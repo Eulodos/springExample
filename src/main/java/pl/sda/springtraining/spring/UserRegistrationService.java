@@ -17,5 +17,6 @@ public class UserRegistrationService {
 
     public void registerUser(UserRegistrationDto userRegistrationDto) {
         User user = userRegistrationDtoToUserBuilder.rewriteDtoToUser(userRegistrationDto);
+        userRegistrationDAO.saveNewUser(user);
     }
 }

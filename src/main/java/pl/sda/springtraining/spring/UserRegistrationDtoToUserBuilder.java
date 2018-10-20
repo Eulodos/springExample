@@ -9,6 +9,9 @@ public class UserRegistrationDtoToUserBuilder {
 
     public User rewriteDtoToUser(UserRegistrationDto userRegistrationDto) {
         User user = new User();
+        UserAddress userAddress = new UserAddress();
+        user.setUserAddress(userAddress);
+
         user.setFirstName(userRegistrationDto.getFirstName());
         user.setLastName(userRegistrationDto.getLastName());
         user.getUserAddress().setZipCode(userRegistrationDto.getUserAddress().getZipCode());
