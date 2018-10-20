@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class ProductDAO {
@@ -15,12 +16,16 @@ public class ProductDAO {
         this.productRepository = productRepository;
     }
 
-    public void saveNewProduct(Product product) {
+    public void saveProduct(Product product) {
         productRepository.save(product);
     }
 
     //todo: DTO
     public List<Product> findProducts() {
         return productRepository.findAll();
+    }
+
+    public Optional<Product> findProductById(Long id) {
+        return productRepository.findById(id);
     }
 }

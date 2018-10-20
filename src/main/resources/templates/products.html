@@ -13,7 +13,11 @@
     </tr>
     <tr th:each="product: ${productsList}">
         <td th:text="*{product.id}"></td>
-        <td th:text="*{product.productName}"></td>
+        <td>
+            <a th:href="@{/product/}+*{product.id.toString()}">
+                <span th:text="*{product.productName}"></span>
+            </a>
+        </td>
         <td th:text="*{product.stockAmount}"></td>
         <td th:text="*{product.price}"></td>
     </tr>

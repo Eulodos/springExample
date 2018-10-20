@@ -1,11 +1,19 @@
 package pl.sda.springtraining.spring.user;
 
 
-import org.apache.commons.codec.digest.DigestUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserRegistrationDtoToUserBuilder {
+
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public UserRegistrationDtoToUserBuilder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public User rewriteDtoToUser(UserRegistrationDto userRegistrationDto) {
         User user = new User();
@@ -21,7 +29,7 @@ public class UserRegistrationDtoToUserBuilder {
         user.setBirthDate(userRegistrationDto.getBirthDate());
         user.setPesel(userRegistrationDto.getPesel());
         user.setEmail(userRegistrationDto.getEmail());
-        user.setPassword(DigestUtils.sha512Hex(userRegistrationDto.getPassword()));
+        user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
         user.setPhone(userRegistrationDto.getPhone());
         user.setPreferEmails(userRegistrationDto.isPreferEmails());
         return user;
