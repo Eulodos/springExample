@@ -4,6 +4,7 @@ package pl.sda.springtraining.spring.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import pl.sda.springtraining.spring.Countries;
 
 @Component
 public class UserRegistrationDtoToUserBuilder {
@@ -22,10 +23,10 @@ public class UserRegistrationDtoToUserBuilder {
 
         user.setFirstName(userRegistrationDto.getFirstName());
         user.setLastName(userRegistrationDto.getLastName());
-        user.getUserAddress().setZipCode(userRegistrationDto.getUserAddress().getZipCode());
-        user.getUserAddress().setCity(userRegistrationDto.getUserAddress().getCity());
-        user.getUserAddress().setCountry(userRegistrationDto.getUserAddress().getCountry());
-        user.getUserAddress().setStreet(userRegistrationDto.getUserAddress().getStreet());
+        user.getUserAddress().setZipCode(userRegistrationDto.getUserAddressDTO().getZipCode());
+        user.getUserAddress().setCity(userRegistrationDto.getUserAddressDTO().getCity());
+        user.getUserAddress().setCountry(Countries.findCountryByCountryCode(userRegistrationDto.getUserAddressDTO().getCountry()));
+        user.getUserAddress().setStreet(userRegistrationDto.getUserAddressDTO().getStreet());
         user.setBirthDate(userRegistrationDto.getBirthDate());
         user.setPesel(userRegistrationDto.getPesel());
         user.setEmail(userRegistrationDto.getEmail());

@@ -17,13 +17,13 @@
     <span th:errors="*{email}"></span>
     <input type="text" th:field="*{password}" placeholder="Hasło">
     <input type="text" th:field="*{phone}" placeholder="Numer telefonu">
-    <input type="text" th:field="*{userAddress.zipCode}" placeholder="Kod pocztowy">
-    <input type="text" th:field="*{userAddress.city}" placeholder="Miasto">
-    <select th:field="*{userAddress.country}">
+    <input type="text" th:field="*{userAddressDTO.zipCode}" placeholder="Kod pocztowy">
+    <input type="text" th:field="*{userAddressDTO.city}" placeholder="Miasto">
+    <select th:field="*{userAddressDTO.country}">
         <option th:value="''" th:text="WYBIERZ"></option>
         <option th:each="country : ${countries}" th:value="${country.countryCode}" th:text="${country.countryName}"></option>
     </select>
-    <input type="text" th:field="*{userAddress.street}" placeholder="Ulica">
+    <input type="text" th:field="*{userAddressDTO.street}" placeholder="Ulica">
     <label for="preferEmails">Woli maile?</label>
     <input type="checkbox" th:field="*{preferEmails}" id="preferEmails">
     <button>Wyślij</button>

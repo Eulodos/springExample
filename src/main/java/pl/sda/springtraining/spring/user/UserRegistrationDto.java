@@ -16,7 +16,7 @@ public class UserRegistrationDto {
     @Size(min = 3,max = 20,message = "Nazwisko jest nieprawidłowe. Należy podać od {min} do {max}, podałeś ${validatedValue}")
     private String lastName;
 
-    private UserAddress userAddress;
+    private UserAddressDTO userAddressDTO;
 
     private String birthDate;
     @Pattern(regexp = "[0-9]{11}", message = "Podałeś nieprawidłowy pesel")
