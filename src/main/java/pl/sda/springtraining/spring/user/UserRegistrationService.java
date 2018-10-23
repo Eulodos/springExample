@@ -20,9 +20,9 @@ public class UserRegistrationService {
 
     public void registerUser(UserRegistrationDto userRegistrationDto) {
         User user = userRegistrationDtoToUserBuilder.rewriteDtoToUser(userRegistrationDto);
-        Role userRole = roleRepository.findRoleByRoleName("USER");
+        Role userRole = roleRepository.findRoleByRoleName("ROLE_USER");
         if (userRole == null) {
-            userRole = new Role("USER");
+            userRole = new Role("ROLE_USER");
             roleRepository.save(userRole);
         }
         user.setRoles(Sets.newHashSet(userRole));

@@ -8,18 +8,23 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private DataSource dataSource;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/").hasAnyAuthority("ROLE_USER")
-                .antMatchers("/product/**").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
+                .antMatchers("/admin/**").hasAnyAuthority("ROLE_ADMIN")
+                .antMatchers("/products/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                 .antMatchers("/console/*").permitAll()
                 .anyRequest().permitAll()
                 .and().csrf().disable()
@@ -44,5 +49,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("user@user.pl")
                 .password(passwordEncoder.encode("user12345"))
                 .roles("USER");
+
+        auth.jdbcAuthentication()
+                .usersByUsernameQuery("SELECT u.email, u.password, 1 FROM user u WHERE u.email=?")
+                .authoritiesByUsernameQuery("SELECT u.email, r.role_name,1 FROM user u JOIN user_role ur ON u.id=ur.user_id JOIN role r ON r.id=ur.roles_id WHERE u.email=?")
+                .dataSource(dataSource)
+                .passwordEncoder(passwordEncoder);
     }
 }

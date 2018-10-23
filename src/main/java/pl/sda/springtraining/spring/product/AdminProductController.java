@@ -9,12 +9,13 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 @Controller
-public class ProductController {
+@RequestMapping(value = "/admin")
+public class AdminProductController {
 
     private ProductService productService;
 
     @Autowired
-    public ProductController(ProductService productService) {
+    public AdminProductController(ProductService productService) {
         this.productService = productService;
     }
 
@@ -27,12 +28,6 @@ public class ProductController {
     @GetMapping(value = "/product")
     public String addProduct() {
         return "addProduct";
-    }
-
-    @GetMapping(value = "products")
-    public String showProducts(Model model) {
-        model.addAttribute("productsList", productService.findProducts());
-        return "products";
     }
 
     @GetMapping(value = "/product/{id}")

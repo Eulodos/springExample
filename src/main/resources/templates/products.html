@@ -14,7 +14,7 @@
     <tr th:each="product: ${productsList}">
         <td th:text="*{product.id}"></td>
         <td>
-            <a th:href="@{/product/}+*{product.id.toString()}">
+            <a th:href="@{/admin/product/}+*{product.id.toString()}">
                 <span th:text="*{product.productName}"></span>
             </a>
         </td>
