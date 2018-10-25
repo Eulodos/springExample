@@ -3,36 +3,31 @@ package pl.sda.springtraining.spring.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pl.sda.springtraining.spring.Countries;
 
-@Component
+@Service
 public class UserRegistrationDtoToUserBuilder {
 
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public UserRegistrationDtoToUserBuilder(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
-
-    public User rewriteDtoToUser(UserRegistrationDto userRegistrationDto) {
+    public User rewriteDtoToUser(UserRegistrationDto userRegistrationDTO) {
         User user = new User();
         UserAddress userAddress = new UserAddress();
         user.setUserAddress(userAddress);
-
-        user.setFirstName(userRegistrationDto.getFirstName());
-        user.setLastName(userRegistrationDto.getLastName());
-        user.getUserAddress().setZipCode(userRegistrationDto.getUserAddressDTO().getZipCode());
-        user.getUserAddress().setCity(userRegistrationDto.getUserAddressDTO().getCity());
-        user.getUserAddress().setCountry(Countries.findCountryByCountryCode(userRegistrationDto.getUserAddressDTO().getCountry()));
-        user.getUserAddress().setStreet(userRegistrationDto.getUserAddressDTO().getStreet());
-        user.setBirthDate(userRegistrationDto.getBirthDate());
-        user.setPesel(userRegistrationDto.getPesel());
-        user.setEmail(userRegistrationDto.getEmail());
-        user.setPassword(passwordEncoder.encode(userRegistrationDto.getPassword()));
-        user.setPhone(userRegistrationDto.getPhone());
-        user.setPreferEmails(userRegistrationDto.isPreferEmails());
+        user.setFirstName(userRegistrationDTO.getFirstName());
+        user.setLastName(userRegistrationDTO.getLastName());
+        user.getUserAddress().setZipCode(userRegistrationDTO.getUserAddressDTO().getZipCode());
+        user.getUserAddress().setCity(userRegistrationDTO.getUserAddressDTO().getCity());
+        user.getUserAddress().setCountry(Countries.findCountryBySymbol(userRegistrationDTO.getUserAddressDTO().getCountry()));
+        user.getUserAddress().setStreet(userRegistrationDTO.getUserAddressDTO().getStreet());
+        user.setBirthDate(userRegistrationDTO.getBirthDate());
+        user.setPesel(userRegistrationDTO.getPesel());
+        user.setEmail(userRegistrationDTO.getEmail());
+        user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
+        user.setPhone(userRegistrationDTO.getPhone());
+        user.setPreferEmails(userRegistrationDTO.isPreferEmails());
         return user;
     }
 }

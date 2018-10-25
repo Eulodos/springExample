@@ -1,31 +1,31 @@
 package pl.sda.springtraining.spring.product;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Component
+@Service
 public class ProductDAO {
 
+    @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
-    public ProductDAO(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+    public Product saveProduct(Product product) {
+        return productRepository.save(product);
     }
 
-    public void saveProduct(Product product) {
-        productRepository.save(product);
+    public List<Product> findProducts(String query) {
+        if (StringUtils.isBlank(query)) {
+            return productRepository.findAll();
+        }
+        return productRepository.findProductsByProductNameLike(query);
     }
 
-    //todo: DTO
-    public List<Product> findProducts() {
-        return productRepository.findAll();
-    }
-
-    public Optional<Product> findProductById(Long id) {
+    public Optional<Product> findProductById(Integer id) {
         return productRepository.findById(id);
     }
+
 }

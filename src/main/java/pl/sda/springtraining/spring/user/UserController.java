@@ -31,7 +31,7 @@ public class UserController {
             return "registerForm";
         }
         userRegistrationService.registerUser(userRegistrationDto);
-        model.addAttribute("userEmail",userRegistrationDto.getEmail());
+        model.addAttribute("userEmail", userRegistrationDto.getEmail());
         return "registerResult";
     }
 
@@ -39,13 +39,12 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.GET)
     public String register(Model model) {
         model.addAttribute("userRegistrationDto", new UserRegistrationDto());
-        model.addAttribute("countries",Countries.values());
+        model.addAttribute("countries", Countries.values());
         return "registerForm";
     }
 
-    @GetMapping(value = "/login")
+    @GetMapping(value ="/login")
     public String loginForm() {
-
         return "loginForm";
     }
 }

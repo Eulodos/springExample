@@ -14,15 +14,16 @@ public class UserRegistrationDAO {
     }
 
     public void saveNewUser(User user) {
+        //sprawdzamy czy istnieje
         if (userExists(user.getEmail())) {
-            throw new UserExistsException("Użytkownik " + user.getEmail() + " już istnieje");
+            throw new UserExistsException("Użytkownik o emailu " + user.getEmail() + " istnieje!");
         }
         userRepository.save(user);
     }
 
-    public boolean userExists(String email){
+    public boolean userExists(String email) {
         if (userRepository.findUserByEmail(email) != null) {
-
+            return true;
         }
         return false;
     }

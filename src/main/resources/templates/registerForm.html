@@ -20,8 +20,8 @@
     <input type="text" th:field="*{userAddressDTO.zipCode}" placeholder="Kod pocztowy">
     <input type="text" th:field="*{userAddressDTO.city}" placeholder="Miasto">
     <select th:field="*{userAddressDTO.country}">
-        <option th:value="''" th:text="WYBIERZ"></option>
-        <option th:each="country : ${countries}" th:value="${country.countryCode}" th:text="${country.countryName}"></option>
+        <option th:value="''" th:text="Wybierz"></option>
+        <option th:each="country : ${countries}" th:value="${country.symbol}" th:text="${country.polishName}"></option>
     </select>
     <input type="text" th:field="*{userAddressDTO.street}" placeholder="Ulica">
     <label for="preferEmails">Woli maile?</label>

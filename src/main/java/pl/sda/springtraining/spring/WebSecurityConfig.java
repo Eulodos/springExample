@@ -49,10 +49,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("user@user.pl")
                 .password(passwordEncoder.encode("user12345"))
                 .roles("USER");
-
         auth.jdbcAuthentication()
-                .usersByUsernameQuery("SELECT u.email, u.password, 1 FROM user u WHERE u.email=?")
-                .authoritiesByUsernameQuery("SELECT u.email, r.role_name,1 FROM user u JOIN user_role ur ON u.id=ur.user_id JOIN role r ON r.id=ur.roles_id WHERE u.email=?")
+                .usersByUsernameQuery(
+                        "SELECT u.email, u.password, 1 " +
+                                "FROM user u " +
+                                "WHERE u.email = ?")
+                .authoritiesByUsernameQuery(
+                        "SELECT u.email, r.role_name, 1 " +
+                                "FROM user u " +
+                                "JOIN user_role ur " +
+                                "ON u.id=ur.user_id " +
+                                "JOIN role r " +
+                                "ON r.id=ur.roles_id " +
+                                "WHERE u.email=?")
                 .dataSource(dataSource)
                 .passwordEncoder(passwordEncoder);
     }

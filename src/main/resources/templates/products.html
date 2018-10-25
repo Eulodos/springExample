@@ -1,17 +1,24 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Produkty</title>
+    <title>Products</title>
 </head>
 <body>
-<table border="2px">
-    <tr><th>Id</th>
-    <th>Nazwa Produktu</th>
-    <th>Stan magazynowy</th>
-    <th>Cena</th>
+
+<form th:action="@{/products}" method="get">
+    <input type="text" th:value="${queryValue}" name="query">
+    <button>Szukaj</button>
+</form>
+
+<table border="1px">
+    <tr>
+        <th>Id</th>
+        <th>Nazwa produktu</th>
+        <th>Stan magazynowy</th>
+        <th>Cena</th>
     </tr>
-    <tr th:each="product: ${productsList}">
+    <tr th:each="product : ${productsList}">
         <td th:text="*{product.id}"></td>
         <td>
             <a th:href="@{/admin/product/}+*{product.id.toString()}">
@@ -24,3 +31,4 @@
 </table>
 </body>
 </html>
+

@@ -11,11 +11,13 @@ public class UserRegistrationService {
     private UserRegistrationDtoToUserBuilder userRegistrationDtoToUserBuilder;
     private RoleRepository roleRepository;
 
+
+
     @Autowired
-    public UserRegistrationService(UserRegistrationDAO userRegistrationDAO, UserRegistrationDtoToUserBuilder userRegistrationDtoToUserBuilder, RoleRepository roleRepository) {
+    public UserRegistrationService(RoleRepository roleRepository, UserRegistrationDAO userRegistrationDAO, UserRegistrationDtoToUserBuilder userRegistrationDtoToUserBuilder) {
+        this.roleRepository = roleRepository;
         this.userRegistrationDAO = userRegistrationDAO;
         this.userRegistrationDtoToUserBuilder = userRegistrationDtoToUserBuilder;
-        this.roleRepository = roleRepository;
     }
 
     public void registerUser(UserRegistrationDto userRegistrationDto) {

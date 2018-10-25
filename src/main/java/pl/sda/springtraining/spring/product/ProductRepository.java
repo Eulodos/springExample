@@ -1,8 +1,12 @@
 package pl.sda.springtraining.spring.product;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
 
-@Repository
-public interface ProductRepository extends JpaRepository<Product,Long> {
+import java.util.List;
+
+public interface ProductRepository extends JpaRepository<Product, Integer> {
+    @Query("SELECT p FROM Product p WHERE UPPER(p.productName) " +
+            "LIKE concat('%',UPPER(?1),'%') ")
+    List<Product> findProductsByProductNameLike(String query);
 }

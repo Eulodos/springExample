@@ -12,17 +12,15 @@ import java.util.Optional;
 @RequestMapping(value = "/admin")
 public class AdminProductController {
 
+    @Autowired
     private ProductService productService;
 
-    @Autowired
-    public AdminProductController(ProductService productService) {
-        this.productService = productService;
-    }
-
     @PostMapping(value = "/product/add")
-    public String addProduct(@RequestParam String productName, @RequestParam Integer stockAmount, @RequestParam BigDecimal price) {
+    public String addProduct(@RequestParam String productName,
+                             @RequestParam Integer stockAmount,
+                             @RequestParam BigDecimal price) {
         productService.createNewProduct(productName, stockAmount, price);
-        return "redirect:/products"; // Tworzy nowy request na URL /products
+        return "redirect:/products"; // tworzy nowy request na url /products
     }
 
     @GetMapping(value = "/product")
@@ -31,7 +29,7 @@ public class AdminProductController {
     }
 
     @GetMapping(value = "/product/{id}")
-    public String editProduct(@PathVariable Long id, Model model) {
+    public String editProduct(@PathVariable Integer id, Model model) {
         Optional<Product> optionalProduct = productService.findProductById(id);
         if (optionalProduct.isPresent()) {
             model.addAttribute("productToEdit", optionalProduct.get());
@@ -40,11 +38,9 @@ public class AdminProductController {
         return "redirect:/product";
     }
 
-    //Id w mappingu nie jest niezbędne
     @PostMapping(value = "/product/{id}")
-    public String editProduct(@PathVariable Long id, Model model, @ModelAttribute Product product) {
+    public String editProduct(@PathVariable Integer id, @ModelAttribute Product product) { // id nie jest niezbedne
         productService.updateProduct(product);
-
         return "redirect:/products";
     }
 }

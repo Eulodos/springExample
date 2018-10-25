@@ -10,12 +10,12 @@ import javax.persistence.Enumerated;
 
 @Setter
 @Getter
-@Embeddable
+@Embeddable // w bazie te dane beda na tym samym poziomie co otaczajce klasy
 public class UserAddress {
 
     private String zipCode;
     private String city;
-    @Enumerated(EnumType.STRING)//domyślnie jest ordinal, który weźmie numer enuma
+    @Enumerated(EnumType.STRING)
     private Countries country;
     private String street;
 }

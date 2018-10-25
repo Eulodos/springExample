@@ -2,21 +2,22 @@ package pl.sda.springtraining.spring.user;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.sda.springtraining.spring.BaseEntity;
 
-import javax.persistence.*;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import java.util.Set;
 
 @Entity
 @Setter
 @Getter
-public class User {
+public class User extends BaseEntity {
 
-    @Id
-    @GeneratedValue
-    private Long id;
     private String firstName;
     private String lastName;
-    @Embedded
+    @Embedded // zawierajace sie w
     private UserAddress userAddress;
     private String birthDate;
     private String pesel;
@@ -24,8 +25,8 @@ public class User {
     private String password;
     private String phone;
     private boolean preferEmails;
-
     @ManyToMany
     @JoinTable(name = "user_role")
     private Set<Role> roles;
+
 }

@@ -2,9 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Dobrze, że jesteś!</title>
+    <title>Bląd</title>
 </head>
 <body>
-<p th:text="'Dziękujemy za rejestracje ' + ${userEmail}"></p>
+<h1>Niestety wystąpił błąd</h1>
+<p th:text="${exception}"></p>
 </body>
 </html>

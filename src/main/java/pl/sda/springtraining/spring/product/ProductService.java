@@ -6,41 +6,43 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductService {
 
-    private ProductDAO productDAO;
+    private final ProductDAO productDAO;
+    private final ProductToProductDTOBuilder productToProductDTOBuilder;
 
     @Autowired
-    public ProductService(ProductDAO productDAO) {
+    public ProductService(ProductDAO productDAO, ProductToProductDTOBuilder productToProductDTOBuilder) {
         this.productDAO = productDAO;
+        this.productToProductDTOBuilder = productToProductDTOBuilder;
     }
 
-    public void createNewProduct(String productName, Integer stockAmount, BigDecimal price) {
+    public ProductDTO createNewProduct(String productName, Integer stockAmount, BigDecimal price) {
         Product product = new Product();
         product.setProductName(productName);
         product.setStockAmount(stockAmount);
         product.setPrice(price);
-
-        productDAO.saveProduct(product);
+        return productToProductDTOBuilder.rewriteProductToProductDTO(productDAO.saveProduct(product));
     }
 
-    public List<Product> findProducts() {
-        return productDAO.findProducts();
+    public List<ProductDTO> findProducts(String query) {
+        return productDAO.findProducts(query).stream()
+                .map(p -> productToProductDTOBuilder.rewriteProductToProductDTO(p))
+                .collect(Collectors.toList());
     }
 
-    public Optional<Product> findProductById(Long id) {
-        return productDAO.findProductById(id);
+    public Optional<Product> findProductById(Integer id) {
+       return productDAO.findProductById(id);
     }
 
-    //todo: zmienic product na productDTO
-    public void updateProduct(Product product) {
+    public void updateProduct(Product product) { // todo zmienic product na DTO
         Product productById = productDAO.findProductById(product.getId()).get();
         productById.setProductName(product.getProductName());
         productById.setStockAmount(product.getStockAmount());
         productById.setPrice(product.getPrice());
-
         productDAO.saveProduct(productById);
     }
 }

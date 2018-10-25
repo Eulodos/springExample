@@ -8,20 +8,22 @@ import java.util.Arrays;
 public enum Countries {
     POLAND("PL", "Polska"),
     GERMANY("DE", "Niemcy"),
-    USA("US", "Stany Zjednoczone"),
-    JAPAN("JP", "Japonia");
+    USA("US", "Stany Zjednoczone Ameryki"),
+    JAPAN("JP100%", "Japonia"),
+    UK("UK", "Wielka Brytania");
 
-    private String countryCode;
-    private String countryName;
+    private final String symbol;
+    private final String polishName;
 
-    Countries(String countryCode, String countryName) {
-        this.countryCode = countryCode;
-        this.countryName = countryName;
+    Countries(String symbol, String polishName) {
+        //todo fixme tu jest pytanie/ciekawostka!!!
+        this.symbol = symbol;
+        this.polishName = polishName;
     }
 
-    public static Countries findCountryByCountryCode(String countryCode) {
-        return Arrays.stream(Countries.values())
-                .filter(country -> country.getCountryCode().equals(countryCode))
+    public static Countries findCountryBySymbol(String symbol) {
+       return Arrays.stream(Countries.values())
+                .filter(c -> c.getSymbol().equals(symbol))
                 .findFirst()
                 .orElse(null);
     }
