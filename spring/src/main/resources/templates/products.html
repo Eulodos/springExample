@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Products</title>
+</head>
+<body>
+
+<form th:action="@{/products}" method="get">
+    <input type="text" th:value="${queryValue}" name="query">
+    <select th:name="productType">
+        <option th:value="''" th:text="Wybierz"></option>
+        <option th:each="pt : ${productTypes}" th:value="${pt.name()}"
+                th:text="${pt.polishName}" th:selected="${selectedProductType eq pt.name()}"></option>
+    </select>
+    <button>Szukaj</button>
+</form>
+
+<table border="1px">
+    <tr>
+        <th>Id</th>
+        <th>Nazwa produktu</th>
+        <th>Stan magazynowy</th>
+        <th>Cena</th>
+        <th>Typ produktu</th>
+    </tr>
+    <tr th:each="product : ${productsList}">
+        <td th:text="*{product.id}"></td>
+        <td>
+            <!--<a th:href="@{/admin/product/}+*{product.id.toString()}">-->
+            <a th:href="@{/admin/product/{id}(id=${product.id})}">
+                <span th:text="*{product.productName}"></span>
+            </a>
+        </td>
+        <td th:text="*{product.stockAmount}"></td>
+        <td th:text="*{product.price}"></td>
+        <td th:text="*{product.productTypeValue}"></td>
+    </tr>
+</table>
+</body>
+</html>
+

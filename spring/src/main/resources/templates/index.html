@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home page</title>
+</head>
+<body>
+<h1 th:text="${@userContextHolder.getUserLoggedIn() + ' CZE !!!'}"></h1>
+<h1 th:text="${msg}"></h1>
+<a href="/products">Produkty</a>
+
+</body>
+</html>

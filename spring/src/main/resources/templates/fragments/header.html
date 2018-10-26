@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="header-css">
+    <!-- this is fragments-css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</div>
+<div th:fragment="header">
+    <div class="topnav">
+        <a th:if="!${@userContextHolder.getUserLoggedIn()}"  href="/register">Rejestracja</a>
+        <a th:if="!${@userContextHolder.getUserLoggedIn()}" href="/login">Login</a>
+        <a th:if="${@userContextHolder.getUserLoggedIn()}"  href="/products">Produkty</a>
+        <a th:if="${@userContextHolder.getUserLoggedIn()}" href="/logout" style="float: right;color: white">Wyloguj</a>
+        <p th:if="${@userContextHolder.getUserLoggedIn()}"
+           th:text="'Zalogowano jako: '+ ${@userContextHolder.getUserLoggedIn()}" style="float: right;color: white"></p>
+
+    </div>
+</div>
+</html>
