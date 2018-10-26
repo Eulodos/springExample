@@ -13,9 +13,11 @@ public class ProductsController {
     private ProductService productService;
 
     @GetMapping(value = "/products")
-    public String showProducts(@RequestParam(required = false) String query, Model model) {
-        model.addAttribute("productsList", productService.findProducts(query));
+    public String showProducts(@RequestParam(required = false) String query, @RequestParam(required = false) String productType, Model model) {
+        model.addAttribute("productsList", productService.findProducts(query,productType));
         model.addAttribute("queryValue",query);
+        model.addAttribute("selectedProductType", productType);
+        model.addAttribute("productTypes",ProductType.values());
         return "products";
     }
 }

@@ -19,12 +19,13 @@ public class ProductRestController {
 
     @PostMapping(value = "/product")
     public ResponseEntity<ProductDTO> addProduct(@RequestBody ProductDTO productDTO) {
-        ProductDTO newProduct = productService.createNewProduct(productDTO.getProductName(), productDTO.getStockAmount(), productDTO.getPrice());
+        ProductDTO newProduct = productService.createNewProduct(productDTO.getProductName(), productDTO.getStockAmount()
+                , productDTO.getPrice(), ProductType.findProductTypeByName(productDTO.getProductTypeValue()));
         return ResponseEntity.status(201).body(newProduct);
     }
 
     @GetMapping(value = "/products")
-    public ResponseEntity<List<ProductDTO>> showProducts(@RequestParam(required = false) String query) {
-        return ResponseEntity.ok(productService.findProducts(query));
+    public ResponseEntity<List<ProductDTO>> showProducts(@RequestParam(required = false) String query, @RequestParam(required = false) String productType) {
+        return ResponseEntity.ok(productService.findProducts(query, productType));
     }
 }

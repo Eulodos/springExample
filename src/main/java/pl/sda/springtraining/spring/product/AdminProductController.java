@@ -18,13 +18,15 @@ public class AdminProductController {
     @PostMapping(value = "/product/add")
     public String addProduct(@RequestParam String productName,
                              @RequestParam Integer stockAmount,
-                             @RequestParam BigDecimal price) {
-        productService.createNewProduct(productName, stockAmount, price);
+                             @RequestParam BigDecimal price,
+                             @RequestParam ProductType productType) {
+        productService.createNewProduct(productName, stockAmount, price, productType);
         return "redirect:/products"; // tworzy nowy request na url /products
     }
 
     @GetMapping(value = "/product")
-    public String addProduct() {
+    public String addProduct(Model model) {
+        model.addAttribute("productTypes",ProductType.values());
         return "addProduct";
     }
 

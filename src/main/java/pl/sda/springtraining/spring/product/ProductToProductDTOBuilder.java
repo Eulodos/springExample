@@ -18,6 +18,7 @@ public class ProductToProductDTOBuilder {
         target.setProductName(source.getProductName());
         target.setStockAmount(source.getStockAmount());
         target.setPrice(source.getPrice());
+        target.setProductType(source.getProductType());
         return target;
     }
 }

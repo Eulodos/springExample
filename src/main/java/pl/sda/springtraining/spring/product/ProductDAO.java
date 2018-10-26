@@ -17,11 +17,18 @@ public class ProductDAO {
         return productRepository.save(product);
     }
 
-    public List<Product> findProducts(String query) {
-        if (StringUtils.isBlank(query)) {
+    public List<Product> findProducts(String query, String productType) {
+        if (StringUtils.isBlank(query) && StringUtils.isBlank(productType)) {
             return productRepository.findAll();
         }
-        return productRepository.findProductsByProductNameLike(query);
+        if (StringUtils.isBlank(query)) {
+            return productRepository.findProductsByProductType(ProductType.findProductTypeByName(productType));
+        }
+        if (StringUtils.isBlank(productType)) {
+            return productRepository.findProductsByProductNameLike(query);
+        }
+
+        return productRepository.findProductsByProductNameLikeAndProductType(query,ProductType.findProductTypeByName(productType));
     }
 
     public Optional<Product> findProductById(Integer id) {

@@ -20,16 +20,17 @@ public class ProductService {
         this.productToProductDTOBuilder = productToProductDTOBuilder;
     }
 
-    public ProductDTO createNewProduct(String productName, Integer stockAmount, BigDecimal price) {
+    public ProductDTO createNewProduct(String productName, Integer stockAmount, BigDecimal price, ProductType productType) {
         Product product = new Product();
         product.setProductName(productName);
         product.setStockAmount(stockAmount);
         product.setPrice(price);
+        product.setProductType(productType);
         return productToProductDTOBuilder.rewriteProductToProductDTO(productDAO.saveProduct(product));
     }
 
-    public List<ProductDTO> findProducts(String query) {
-        return productDAO.findProducts(query).stream()
+    public List<ProductDTO> findProducts(String query, String productType) {
+        return productDAO.findProducts(query,productType).stream()
                 .map(p -> productToProductDTOBuilder.rewriteProductToProductDTO(p))
                 .collect(Collectors.toList());
     }

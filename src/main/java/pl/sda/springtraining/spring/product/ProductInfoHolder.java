@@ -9,6 +9,8 @@ public interface ProductInfoHolder {
 
     java.math.BigDecimal getPrice();
 
+    ProductType getProductType();
+
     void setId(Integer id);
 
     void setProductName(String productName);
@@ -16,4 +18,6 @@ public interface ProductInfoHolder {
     void setStockAmount(Integer stockAmount);
 
     void setPrice(java.math.BigDecimal price);
+
+    void setProductType(ProductType productType);
 }
