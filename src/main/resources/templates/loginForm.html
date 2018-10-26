@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <div th:replace="fragments/header :: header-css"></div>
+    <link rel="stylesheet" th:href="@{/css/signin.css}">
 </head>
 <body>
+<div th:replace="fragments/header :: header"></div>
 <form th:action="@{/login-process}" method="post" >
     <input name="loginEmail">
     <input name="loginPassword">
     <button>Zaloguj</button>
 </form>
+<div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>
